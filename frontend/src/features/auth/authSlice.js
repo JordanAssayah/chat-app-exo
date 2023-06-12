@@ -4,8 +4,8 @@ const initialState = {
   fullName: undefined,
 }
 
-export const userSlice = createSlice({
-  name: 'user',
+export const authSlice = createSlice({
+  name: 'authentication',
   initialState,
   reducers: {
     setFullName: (state, action) => {
@@ -16,6 +16,6 @@ export const userSlice = createSlice({
 
 export const {
   setFullName,
-} = userSlice.actions
+} = authSlice.actions
 
-export default userSlice.reducer
+export default authSlice.reducer
