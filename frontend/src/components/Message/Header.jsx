@@ -47,7 +47,7 @@ const MessageHeader = ({ message, mouseHoverMessageId }) => {
 
 MessageHeader.propTypes = {
   message: PropTypes.object.isRequired,
-  mouseHoverMessageId: PropTypes.bool
+  mouseHoverMessageId: PropTypes.number
 }
 
 export default MessageHeader
