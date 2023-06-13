@@ -1,13 +1,14 @@
 import { Fragment } from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 
 const channels = [
-  { id: 1, name: 'heroicons', href: '#', current: false },
-  { id: 2, name: 'tailwind-labs', href: '#', current: false },
-  { id: 3, name: 'workcation', href: '#', current: false },
+  { id: 1, name: 'heroicons', current: false },
+  { id: 2, name: 'tailwind-labs', current: false },
+  { id: 3, name: 'workcation', current: false },
 ]
 
 function classNames(...classes) {
@@ -70,8 +71,8 @@ const SideBar = ({
                         <ul role="list" className="-mx-2 mt-4 space-y-1">
                           {channels.map((channel) => (
                             <li key={channel.name}>
-                              <a
-                                href={channel.href}
+                              <Link
+                                to={`channels/${channel.id}`}
                                 className={classNames(
                                   channel.current
                                     ? 'bg-gray-800 text-white'
@@ -80,7 +81,7 @@ const SideBar = ({
                                 )}
                               >
                                 <span className="truncate"># {channel.name}</span>
-                              </a>
+                              </Link>
                             </li>
                           ))}
                         </ul>
@@ -105,8 +106,8 @@ const SideBar = ({
                 <ul role="list" className="-mx-2 my-4 space-y-1">
                   {channels.map((channel) => (
                     <li key={channel.name}>
-                      <a
-                        href={channel.href}
+                      <Link
+                        to={`channels/${channel.id}`}
                         className={classNames(
                           channel.current
                             ? 'bg-gray-800 text-white'
@@ -115,7 +116,7 @@ const SideBar = ({
                         )}
                       >
                         <span className="truncate"># {channel.name}</span>
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>

@@ -23,7 +23,7 @@ const Message = ({
 
 Message.propTypes = {
   message: PropTypes.object.isRequired,
-  mouseHoverMessageId: PropTypes.bool,
+  mouseHoverMessageId: PropTypes.number,
   setMouseHoverMessageId: PropTypes.func.isRequired,
 }
 

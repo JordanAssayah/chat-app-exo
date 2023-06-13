@@ -1,9 +1,19 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { setUserName } from './authSlice'
 
 const AuthForm = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate();
+
+  const onSubmitForm = (evt) => {
+    evt.preventDefault()
+    dispatch(setUserName(evt.target.username.value))
+    navigate('/dashboard')
+  }
+
   return (
-    <form className="space-y-6" action="#" method="POST">
+    <form className="space-y-6" onSubmit={onSubmitForm}>
       <div>
         <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">
           Username
@@ -31,7 +41,5 @@ const AuthForm = () => {
     </form>
   )
 }
-
-AuthForm.propTypes = {}
 
 export default AuthForm
