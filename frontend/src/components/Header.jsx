@@ -14,7 +14,8 @@ function classNames(...classes) {
 }
 
 const Header = ({
-  setSidebarOpen
+  setSidebarOpen,
+  username,
 }) => {
   return (
     <div className="w-full z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-900 bg-gray-800 px-4 shadow-sm sm:gap-x-4 sm:px-4 font-mono">
@@ -33,11 +34,11 @@ const Header = ({
             <Menu.Button className="-m-1.5 flex items-center p-1.5">
               <span className="sr-only">Open user menu</span>
               <span className="uppercase font-semibold flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-sm text-gray-400 group-hover:text-white">
-                t
+                {Array.from(username)[0]}
               </span>
               <span className="hidden lg:flex lg:items-center">
                 <span className="ml-4 text-sm font-semibold leading-6 text-slate-300" aria-hidden="true">
-                  test
+                  {username}
                 </span>
                 <ChevronDownIcon className="ml-2 h-5 w-5 text-gray-400" aria-hidden="true" />
               </span>
@@ -78,6 +79,7 @@ const Header = ({
 
 Header.propTypes = {
   setSidebarOpen: PropTypes.func.isRequired,
+  username: PropTypes.string.isRequired,
 }
 
 export default Header
