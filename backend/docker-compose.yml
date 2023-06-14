@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  cassandra:
+    image: cassandra
+    container_name: cassandra
+    ports:
+      - '9042:9042'
+    volumes:
+      - ./db/data:/var/lib/cassandra
+      - ./db/scripts:/scripts
+    environment:
+      - CASSANDRA_SEEDS=cassandra
+      - CASSANDRA_CLUSTER_NAME=cassandra
