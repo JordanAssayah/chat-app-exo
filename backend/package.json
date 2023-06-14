@@ -5,8 +5,13 @@
   "main": "index.js",
   "author": "Jordan Assayah",
   "license": "MIT",
+  "scripts": {
+    "dev": "node index.js"
+  },
   "dependencies": {
+    "cassandra-driver": "^4.6.4",
     "express": "^4.18.2",
-    "socket.io": "^4.6.2"
+    "socket.io": "^4.6.2",
+    "uuid": "^9.0.0"
   }
 }
