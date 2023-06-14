@@ -1,9 +1,13 @@
+import { useContext } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setMessage } from './chatSlice'
+
+import { SocketIoContext } from '../../utils/contexts'
 
 const ChatPrompt = () => {
   const message = useSelector(state => state.chat.message)
   const dispatch = useDispatch()
+  const socketIo = useContext(SocketIoContext)
 
   return (
     <div className='bg-gray-800 pb-2 px-4 h-24 absolute w-full right-0 left-0 bottom-0'>
@@ -19,6 +23,7 @@ const ChatPrompt = () => {
           onChange={evt => dispatch(setMessage(evt.target.value))}
           onKeyUp={evt => {
             if (evt.key === 'Enter' && evt.shiftKey === true) {
+              socketIo.sendMessage(message)
               dispatch(setMessage(''))
             }
           }}

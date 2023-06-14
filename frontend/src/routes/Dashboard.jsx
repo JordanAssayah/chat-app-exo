@@ -5,26 +5,29 @@ import ChatPrompt from '../features/chat/ChatPrompt'
 import SideBar from '../components/SideBar'
 import Header from '../components/Header'
 import Messages from '../features/channels/messages/Messages'
+import SocketIoConnector from '../components/SocketIoConnector'
 
-const Chat = () => {
+const Dashboard = () => {
   const username = useSelector(state => state.auth.username)
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
-    <div className='w-full flex h-full lg:max-h-screen lg:h-screen'>
-      <SideBar setSidebarOpen={setSidebarOpen} sidebarOpen={sidebarOpen} />
+    <SocketIoConnector username={username}>
+      <div className='w-full flex h-full lg:max-h-screen lg:h-screen'>
+        <SideBar setSidebarOpen={setSidebarOpen} sidebarOpen={sidebarOpen} />
 
-      <main className='bg-gray-800 w-full relative'>
-        <Header setSidebarOpen={setSidebarOpen} username={username} />
+        <main className='bg-gray-800 w-full relative'>
+          <Header setSidebarOpen={setSidebarOpen} username={username} />
 
-        <div className='overflow-y-scroll messages-content-area py-4'>
-          <Messages />
-        </div>
+          <div className='overflow-y-scroll messages-content-area py-4'>
+            <Messages />
+          </div>
 
-        <ChatPrompt />
-      </main>
-    </div>
+          <ChatPrompt />
+        </main>
+      </div>
+    </SocketIoConnector> 
   )
 }
 
-export default Chat
+export default Dashboard
