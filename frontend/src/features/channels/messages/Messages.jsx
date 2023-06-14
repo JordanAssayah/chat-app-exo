@@ -1,25 +1,23 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { useSelector } from 'react-redux'
 
 import Message from '../../../components/Message'
 
-const messages = [
-  {
-    id: 1,
-    author: 'Leslie Alexander',
-    content: 'Salut! Tu vas bien?',
-    datetime: new Date()
-  },
-]
+import { SocketIoContext } from '../../../utils/contexts'
 
 const Messages = () => {
+  const messages = useSelector(state => state.messages.entities)
+  const socketIo = useContext(SocketIoContext)
+
   const [mouseHoverMessageId, setMouseHoverMessageId] = useState(undefined)
 
   return (
     <ul role="list">
-      {messages.map((message) => (
+      {Object.values(messages).map((message) => (
         <Message
-          key={`message-${message.id}`}
+          key={`message-${message.messageId}`}
           message={message}
+          onDeleteMessage={() => socketIo.deleteMessage(message.messageId)}
           mouseHoverMessageId={mouseHoverMessageId}
           setMouseHoverMessageId={setMouseHoverMessageId} />
       ))}
