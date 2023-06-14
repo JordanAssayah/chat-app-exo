@@ -36,4 +36,4 @@ CREATE TABLE chat.messages (
 );
 
 
-INSERT INTO chat.channels (channel_id, name, created_at, updated_at) VALUES (now(), 'general', now(), now());
+INSERT INTO chat.channels (channel_id, name, created_at, updated_at) VALUES (now(), 'general', toTimestamp(now()), toTimestamp(now()));
