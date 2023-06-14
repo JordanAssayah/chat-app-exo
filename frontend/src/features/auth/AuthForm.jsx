@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { setUserName } from './authSlice'
 
 const AuthForm = () => {
@@ -37,6 +37,14 @@ const AuthForm = () => {
         >
           Start to chat
         </button>
+      </div>
+      <div>
+        <Link
+          to={'/register'}
+          className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+          Create an account
+        </Link>
       </div>
     </form>
   )
