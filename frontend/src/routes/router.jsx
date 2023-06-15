@@ -6,6 +6,8 @@ import Register from './Register'
 import Dashboard from './Dashboard'
 import ErrorPage from './Error'
 
+import Messages from '../features/channels/messages/Messages'
+
 
 const router = createBrowserRouter([
   {
@@ -19,12 +21,16 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: '/dashboard',
+    path: '/channels',
     element: (
       <ProtectedRoute>
         <Dashboard />
       </ProtectedRoute>
     ),
+    children: [{
+      path: '/channels/:channelId',
+      element: <Messages />,
+    }],
     errorElement: <ErrorPage />,
   },
 ])
