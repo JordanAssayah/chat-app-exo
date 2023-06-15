@@ -6,11 +6,12 @@
   "author": "Jordan Assayah",
   "license": "MIT",
   "scripts": {
-    "dev": "node index.js"
+    "dev": "nodemon index.js"
   },
   "dependencies": {
     "cassandra-driver": "^4.6.4",
     "express": "^4.18.2",
+    "nodemon": "^2.0.22",
     "socket.io": "^4.6.2",
     "uuid": "^9.0.0"
   }

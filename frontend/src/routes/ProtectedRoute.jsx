@@ -3,7 +3,7 @@ import { Navigate, Outlet } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 const ProtectedRoute = ({ children, redirectPath = '/' }) => {
-  const username = useSelector(state => state.auth.username)
+  const username = useSelector(state => state.auth.user.username)
 
   if (!username) {
     return <Navigate to={redirectPath} replace />
