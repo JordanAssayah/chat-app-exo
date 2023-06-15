@@ -14,7 +14,7 @@ export default (io, socket) => {
     
     const general = await queries.getGeneralChannel()
 
-    const queries = [
+    const qs = [
       {
         query: `
           INSERT INTO users (user_id, username, email, password, created_at, updated_at)
@@ -29,7 +29,7 @@ export default (io, socket) => {
         params: [ user_id, general.channel_id ]
       }
     ];
-    await CassandraClient.batch(queries, { prepare: true })
+    await CassandraClient.batch(qs, { prepare: true })
 
     socket.emit('user:created', { user_id, username: user.username, email: user.email })
   }
