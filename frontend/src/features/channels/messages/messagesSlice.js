@@ -10,9 +10,16 @@ export const messagesSlice = createSlice({
   initialState,
   reducers: {
     addMessage: (state, action) => {
-      const { messageId } = action.payload
-      state.entities[messageId] = action.payload
-      state.ids.push(messageId)
+      const { message_id } = action.payload
+      state.entities[message_id] = action.payload
+      state.ids.push(message_id)
+    },
+    setMessages: (state, action) => {
+      for (const message of action.payload) {
+        const { message_id } = message
+        state.entities[message_id] = message
+        state.ids.push(message_id)
+      }
     },
     deleteMessageById: (state, action) => {
       const id = action.payload
@@ -24,6 +31,7 @@ export const messagesSlice = createSlice({
 
 export const {
   addMessage,
+  setMessages,
   deleteMessageById,
 } = messagesSlice.actions
 

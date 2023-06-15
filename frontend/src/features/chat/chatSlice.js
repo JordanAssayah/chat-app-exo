@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import * as messagesActions from '../channels/messages/messagesSlice'
 
 const initialState = {
   message: '',

@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  user: undefined,
-  username: undefined,
+  user: {
+    username: undefined
+  },
 }
 
 export const authSlice = createSlice({
@@ -13,7 +14,7 @@ export const authSlice = createSlice({
       state.user = action.payload
     },
     setUserName: (state, action) => {
-      state.username = action.payload
+      state.user.username = action.payload
     },
   },
 })
