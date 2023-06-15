@@ -2,30 +2,36 @@ import { v4 as uuidv4 } from 'uuid'
 import CassandraClient from '../db/connection.js'
 
 export default (io, socket) => {
-  const createMessage = async ({ content, from, to }) => {
-    const messageId = uuidv4()
+  const createMessage = async ({ text, sender_id, channel_id }) => {
+    const message_id = uuidv4()
     const now = new Date()
     const query = `
       INSERT INTO messages (message_id, text, sender_id, channel_id, created_at, updated_at)
-      VALUES (?, ?, now(), now(), ?, ?)
+      VALUES (?, ?, ?, ?, ?, ?)
     `
-    await CassandraClient.execute(query, [messageId, content, now, now], { prepare: true })
+    await CassandraClient.execute(query, [message_id, text, sender_id, channel_id, now, now], { prepare: true })
 
-    io.to(to).emit('message', { content, from, to, messageId, datetime: now })
+    io.in(channel_id).emit('message', {
+      text,
+      sender_id,
+      channel_id,
+      message_id,
+      created_at: now
+    })
   }
 
-  const getAllMessagesByChannelId = async ({ channelId }) => {
+  const getAllMessagesByChannelId = async ({ channel_id }) => {
     const query = 'SELECT * FROM messages WHERE channel_id = ?'
     const results = await CassandraClient.execute(query, [channelId], { prepare: true })
 
     io.to(socket.id).emit('message:getAllByChannelId', results.rows)
   }
 
-  const deleteMessageById = async ({ id, to }) => {
+  const deleteMessageById = async ({ id, channel_id }) => {
     const query = `DELETE FROM messages WHERE message_id = ?`
     await CassandraClient.execute(query, [id], { prepare: true })
 
-    io.to(to).emit('message:deleted', id)
+    io.to(channel_id).emit('message:deleted', id)
   }
 
   socket.on('message:create', createMessage)
