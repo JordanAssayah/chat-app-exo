@@ -16,10 +16,6 @@ cd backend && yarn
 
 ```bash
 cd backend && docker compose up -d
-```
-
-```bash
-cd backend && docker compose up -d
 
 # Connect to the container cqlsh
 docker exec -it cassandra cqlsh
