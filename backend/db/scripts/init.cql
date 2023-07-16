@@ -9,6 +9,8 @@ CREATE TABLE chat.users (
   updated_at TIMESTAMP
 );
 
+CREATE INDEX ON chat.users (username);
+
 CREATE TABLE chat.channels (
   channel_id UUID PRIMARY KEY,
   name TEXT,
@@ -36,4 +38,5 @@ CREATE TABLE chat.messages (
 );
 
 
-INSERT INTO chat.channels (channel_id, name, created_at, updated_at) VALUES (now(), 'general', now(), now());
+INSERT INTO chat.channels (channel_id, name, created_at, updated_at)
+VALUES (uuid(), 'general', toTimestamp(now()), toTimestamp(now()));

@@ -15,24 +15,15 @@ cd backend && yarn
 ### Create a docker container for cassandra
 
 ```bash
-docker pull cassandra:latest
-```
+cd backend && docker compose up -d
 
-Copy the `db/data.cql` file to the `cassandra-data` folder for correct binding in the container
+# Connect to the container cqlsh
+docker exec -it cassandra cqlsh
 
-Create a container
-```bash
-docker run --name my-cassandra -p 9042:9042 -v /path-to-the-project/backend/db/cassandra-data:/var/lib/cassandra -d cassandra
-```
+# Run the init script
+SOURCE '/scripts/init.cql';
 
-To connect to the container
-```bash
-docker exec -it my-cassandra cqlsh
-```
-
-To create the keyspace and init the tables
-```bash
-SOURCE '/var/lib/cassandra/data.cql';
+exit
 ```
 
 ## Run the project

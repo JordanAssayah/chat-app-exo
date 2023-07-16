@@ -1,15 +1,10 @@
 import { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
-
-const channels = [
-  { id: 1, name: 'heroicons', current: false },
-  { id: 2, name: 'tailwind-labs', current: false },
-  { id: 3, name: 'workcation', current: false },
-]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -19,6 +14,8 @@ const SideBar = ({
   sidebarOpen,
   setSidebarOpen
 }) => {
+  const channels = useSelector(state => state.channels.entities)
+
   return (
     <>
       <Transition.Root show={sidebarOpen} as={Fragment}>
@@ -69,10 +66,11 @@ const SideBar = ({
                       <li>
                         <div className="text-xs font-semibold leading-6 text-gray-400">Channels</div>
                         <ul role="list" className="-mx-2 mt-4 space-y-1">
-                          {channels.map((channel) => (
+                          {Object.values(channels).map((channel) => (
                             <li key={channel.name}>
                               <Link
-                                to={`channels/${channel.id}`}
+                                replace
+                                to={channel.channel_id}
                                 className={classNames(
                                   channel.current
                                     ? 'bg-gray-800 text-white'
@@ -104,10 +102,11 @@ const SideBar = ({
               <li>
                 <div className="text-xs font-semibold leading-6 text-gray-400 capitalize">channels</div>
                 <ul role="list" className="-mx-2 my-4 space-y-1">
-                  {channels.map((channel) => (
+                  {Object.values(channels).map((channel) => (
                     <li key={channel.name}>
                       <Link
-                        to={`channels/${channel.id}`}
+                        replace
+                        to={channel.channel_id}
                         className={classNames(
                           channel.current
                             ? 'bg-gray-800 text-white'

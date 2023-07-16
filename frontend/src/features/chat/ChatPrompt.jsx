@@ -28,7 +28,7 @@ const ChatPrompt = () => {
             }
           }}
           className="block w-full rounded-md resize-none h-20 border-0 py-1.5 bg-gray-800 text-slate-300 placeholder:text-gray-400 focus:ring-0 text-sm sm:leading-6"
-          placeholder="Write a message... Press [ctrl + enter] to send it"
+          placeholder="Write a message... Press [shift + enter] to send it"
         />
       </div>
     </div>

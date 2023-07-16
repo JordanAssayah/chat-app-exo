@@ -7,6 +7,7 @@ import { SocketIoContext } from '../../../utils/contexts'
 
 const Messages = () => {
   const messages = useSelector(state => state.messages.entities)
+  const users = useSelector(state => state.users.entities)
   const socketIo = useContext(SocketIoContext)
 
   const [mouseHoverMessageId, setMouseHoverMessageId] = useState(undefined)
@@ -15,9 +16,10 @@ const Messages = () => {
     <ul role="list">
       {Object.values(messages).map((message) => (
         <Message
-          key={`message-${message.messageId}`}
+          key={`message-${message.message_id}`}
           message={message}
-          onDeleteMessage={() => socketIo.deleteMessage(message.messageId)}
+          user={users[message.sender_id]}
+          onDeleteMessage={() => socketIo.deleteMessage(message.message_id)}
           mouseHoverMessageId={mouseHoverMessageId}
           setMouseHoverMessageId={setMouseHoverMessageId} />
       ))}
