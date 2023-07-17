@@ -1,5 +1,4 @@
 import RegisterForm from '../features/auth/RegisterForm'
-
 import SocketIoConnector from '../components/SocketIoConnector'
 
 function Register() {

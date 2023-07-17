@@ -11,15 +11,15 @@ export const usersSlice = createSlice({
   reducers: {
     setUsers: (state, action) => {
       for (const user of action.payload) {
-        const { user_id } = user
-        state.entities[user_id] = user
-        state.ids.push(user_id)
+        const { _id } = user
+        state.entities[_id] = user
+        state.ids.push(_id)
       }
     },
     addUserAfterCreation: (state, action) => {
-      const { user_id } = action.payload
-      state.entities[user_id] = action.payload
-      state.ids.push(user_id)
+      const { _id } = action.payload
+      state.entities[_id] = action.payload
+      state.ids.push(_id)
     },
   },
 })

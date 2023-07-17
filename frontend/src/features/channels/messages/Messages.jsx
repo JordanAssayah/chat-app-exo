@@ -16,10 +16,10 @@ const Messages = () => {
     <ul role="list">
       {Object.values(messages).map((message) => (
         <Message
-          key={`message-${message.message_id}`}
+          key={`message-${message._id}`}
           message={message}
-          user={users[message.sender_id]}
-          onDeleteMessage={() => socketIo.deleteMessage(message.message_id)}
+          user={users[message.user_id]}
+          onDeleteMessage={() => socketIo.deleteMessage(message._id)}
           mouseHoverMessageId={mouseHoverMessageId}
           setMouseHoverMessageId={setMouseHoverMessageId} />
       ))}

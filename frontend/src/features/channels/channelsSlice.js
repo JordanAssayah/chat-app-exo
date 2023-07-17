@@ -14,10 +14,10 @@ export const channelsSlice = createSlice({
       state.message = action.payload
     },
     setGeneralChannel: (state, action) => {
-      const { channel_id } = action.payload
-      state.entities[channel_id] = action.payload
-      state.ids.push(channel_id)
-      state.generalId = channel_id
+      const { _id } = action.payload
+      state.entities[_id] = action.payload
+      state.ids.push(_id)
+      state.generalId = _id
     },
   },
 })

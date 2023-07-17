@@ -12,7 +12,7 @@ const Message = ({
   return (
     <li
       className="flex justify-between gap-x-6 pt-1 pb-2 px-6 hover:bg-slate-700/40"
-      onMouseEnter={() => setMouseHoverMessageId(message.message_id)}
+      onMouseEnter={() => setMouseHoverMessageId(message._id)}
       onMouseLeave={() => setMouseHoverMessageId(undefined)}
     >
       <div className="w-full relative">

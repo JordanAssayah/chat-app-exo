@@ -18,17 +18,17 @@ const MessageHeader = ({
 }) => {
   return (
     <div className="flex items-center gap-x-3">
-      {/* <div className="bg-emerald-500/20 p-1">
+      <div className="bg-emerald-500/20 p-1">
         <div className="h-1 w-1 bg-emerald-500"></div>
-      </div> */}
+      </div>
       <h2 className="capitalize text-xs font-semibold leading-6 text-white font-mono">
         {user.username}
       </h2>
       <p className='text-xs text-slate-300 font-mono'>
-        {dateFormat(new Date(message.created_at), 'dd/MM/yyyy HH:mm:ss')}
+        {dateFormat(new Date(message.createdAt), 'dd/MM/yyyy HH:mm:ss')}
       </p>
       <span className={classNames(
-        mouseHoverMessageId !== message.message_id && 'hidden',
+        mouseHoverMessageId !== message._id && 'hidden',
         'isolate inline-flex rounded-md shadow-md absolute -top-3 right-0'
       )}>
         <button

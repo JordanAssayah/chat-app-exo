@@ -1,5 +1,4 @@
 import AuthForm from '../features/auth/AuthForm'
-
 import SocketIoConnector from '../components/SocketIoConnector'
 
 function Authentication() {
