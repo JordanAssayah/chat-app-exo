@@ -9,5 +9,6 @@ import { Message, MessageSchema } from './schemas/message.schema';
     MongooseModule.forFeature([{ name: Message.name, schema: MessageSchema }]),
   ],
   providers: [MessagesGateway, MessagesService],
+  exports: [MessagesService],
 })
 export class MessagesModule {}

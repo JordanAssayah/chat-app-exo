@@ -111,15 +111,15 @@ const SocketIoConnector = ({ children }) => {
   }
 
   const sendMessage = (message) => {
-    socket.emit('message:create', {
-      text: message,
-      sender_id: connectedUser.user_id,
+    socket.emit('createMessage', {
+      content: message,
+      user_id: connectedUser._id,
       channel_id: generalId,
     })
   }
 
   const deleteMessage = (id) => {
-    socket.emit('message:deleteById', { id, channel_id: generalId })
+    socket.emit('removeMessage', { id, channel_id: generalId })
   }
 
   const createChannel = (channel) => {

@@ -70,7 +70,7 @@ const SideBar = ({
                             <li key={channel.name}>
                               <Link
                                 replace
-                                to={channel.channel_id}
+                                to={channel._id}
                                 className={classNames(
                                   channel.current
                                     ? 'bg-gray-800 text-white'
@@ -106,7 +106,7 @@ const SideBar = ({
                     <li key={channel.name}>
                       <Link
                         replace
-                        to={channel.channel_id}
+                        to={channel._id}
                         className={classNames(
                           channel.current
                             ? 'bg-gray-800 text-white'

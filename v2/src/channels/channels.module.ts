@@ -11,5 +11,6 @@ import { ChannelsGateway } from './channels.gateway';
   ],
   controllers: [ChannelsController],
   providers: [ChannelsService, ChannelsGateway],
+  exports: [ChannelsService],
 })
 export class ChannelsModule {}

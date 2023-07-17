@@ -2,10 +2,12 @@ import {
   WebSocketGateway,
   SubscribeMessage,
   MessageBody,
+  WebSocketServer,
+  ConnectedSocket,
 } from '@nestjs/websockets';
 import { MessagesService } from './messages.service';
 import { CreateMessageDto } from './dto/create-message.dto';
-// import { UpdateMessageDto } from './dto/update-message.dto';
+import { Server, Socket } from 'socket.io';
 
 @WebSocketGateway({
   cors: {
@@ -13,11 +15,20 @@ import { CreateMessageDto } from './dto/create-message.dto';
   },
 })
 export class MessagesGateway {
+  @WebSocketServer()
+  server: Server;
+
   constructor(private readonly messagesService: MessagesService) {}
 
   @SubscribeMessage('createMessage')
-  create(@MessageBody() createMessageDto: CreateMessageDto) {
-    return this.messagesService.create(createMessageDto);
+  async create(
+    @MessageBody() createMessageDto: CreateMessageDto,
+    @ConnectedSocket() socket: Socket,
+  ) {
+    const createdMessage = await this.messagesService.create(createMessageDto);
+    return this.server
+      .in(createMessageDto.channel_id)
+      .emit('message', createdMessage);
   }
 
   @SubscribeMessage('findAllMessages')
@@ -30,13 +41,10 @@ export class MessagesGateway {
     return this.messagesService.findOne(id);
   }
 
-  // @SubscribeMessage('updateMessage')
-  // update(@MessageBody() updateMessageDto: UpdateMessageDto) {
-  //   return this.messagesService.update(updateMessageDto.id, updateMessageDto);
-  // }
-
   @SubscribeMessage('removeMessage')
-  remove(@MessageBody() id: string) {
-    return this.messagesService.remove(id);
+  async remove(@MessageBody() { id, channel_id }) {
+    const deleteMessage = await this.messagesService.remove(id);
+    this.server.in(channel_id).emit('message:deleted', id);
+    return deleteMessage;
   }
 }

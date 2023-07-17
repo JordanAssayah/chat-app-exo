@@ -25,6 +25,10 @@ export class ChannelsService {
     return this.channelModel.findOne({ _id: id }).exec();
   }
 
+  async findOneByName(name: string): Promise<Channel> {
+    return this.channelModel.findOne({ name }).exec();
+  }
+
   // async update(id: number, updateChannelDto: UpdateChannelDto) {
   //   return `This action updates a #${id} channel`;
   // }

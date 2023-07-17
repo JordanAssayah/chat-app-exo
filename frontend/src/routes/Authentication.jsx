@@ -13,7 +13,6 @@ function Authentication() {
           </div>
           <AuthForm />
         </div>
-        <AuthForm />
       </div>
     </SocketIoConnector>
   )
